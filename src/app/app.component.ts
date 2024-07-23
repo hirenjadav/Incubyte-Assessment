@@ -13,6 +13,9 @@ export class AppComponent {
   add(numbers: string): number {
     if(numbers.length === 0) return 0;
 
-    return parseInt(numbers);
+    const numberArr: string[] = numbers.split(',');
+    const sum: number = numberArr.reduce((a, x) => a + parseInt(x), 0);
+
+    return sum;
   }
 }

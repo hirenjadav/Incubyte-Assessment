@@ -26,4 +26,16 @@ describe('AppComponent', () => {
     expect(app.add('5')).toEqual(5);
   });
 
+  it('should test add for two comma saperated numbers', () => {
+    const fixture = TestBed.createComponent(AppComponent);
+    const app = fixture.componentInstance;
+    expect(app.add('5,12')).toEqual(17);
+  });
+
+  it('should test add for multiple comma saperated numbers', () => {
+    const fixture = TestBed.createComponent(AppComponent);
+    const app = fixture.componentInstance;
+    expect(app.add('5,12,16,8')).toEqual(41);
+  });
+
 });
