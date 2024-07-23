@@ -92,4 +92,10 @@ describe('AppComponent', () => {
     expect(app.add('//[**]5**8**12**15')).toEqual(40);
   });
 
+  it('should test add for multiple delimiter with multiple characters', () => {
+    const fixture = TestBed.createComponent(AppComponent);
+    const app = fixture.componentInstance;
+    expect(app.add('//[*][++]5*8++12*15\n10')).toEqual(50);
+  });
+
 });

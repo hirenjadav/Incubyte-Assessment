@@ -11,36 +11,54 @@ import { RouterOutlet } from '@angular/router';
 export class AppComponent {
 
   add(numbers: string): number {
-    if(numbers.length === 0) return 0;
-
-    let delimiter: string = ',';
+    // return 0 when numbers list is empty
+    if(!numbers) return 0;
+    
+    let delimiters: string[] = [','];
     if(numbers.startsWith('//')) {
       
-      // This check is when delimiter having multiple characters
+      // This check is when multiple delimiter having multiple characters
       if(numbers[2] == '[') {
-        let i: number = 3;
-        while(numbers[i] != ']') i++;
+        delimiters = [];
 
-        delimiter = numbers.substring(3, i);
-        numbers = numbers.substring(i + 1);
+        const lastIndex: number = numbers.lastIndexOf(']');
+        
+        // To create list of delimiters
+        let j: number = 3;
+        while(j <= lastIndex) {
+          const k: number = j;
+          while(numbers[j] != ']') j++;
+          delimiters.push(numbers.substring(k, j));
+          j += 2;
+        }
+        
+        // To get rest of number after removing delimiters declartions
+        numbers = numbers.substring(lastIndex + 1);
       } else {
         
         // This check is when delimiter is '-' then we need to separate it from negative numbers.
         if(numbers[2] == '-') {
-          numbers = numbers.replaceAll('-', delimiter);
-          numbers = numbers.replaceAll(`${delimiter}${delimiter}`, `${delimiter}-`);
+          numbers = numbers.replaceAll('-', delimiters[0]);
+          numbers = numbers.replaceAll(`${delimiters[0]}${delimiters[0]}`, `${delimiters[0]}-`);
         
         }
         
-        // To extract delimiter
-        delimiter = numbers[2];
+        // To set different delimiter
+        delimiters[0] = numbers[2];
+
+        // To get rest of number after removing delimiters declartions
         numbers = numbers.substring(3);
       }
     }
 
-    numbers = numbers.replaceAll('\n', delimiter);
+    // To replce \n with delimiters.
+    numbers = numbers.replaceAll('\n', delimiters[0]);
     
-    const numberArr: string[] = numbers.split(delimiter);
+    delimiters.forEach(x => {
+      numbers = numbers.replaceAll(x, delimiters[0]);
+    });
+
+    const numberArr: string[] = numbers.split(delimiters[0]);
     const negativeNumberArr: number[] = [];
     
     const sum: number = numberArr.reduce((a, x) => {
