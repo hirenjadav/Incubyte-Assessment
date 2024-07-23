@@ -1,1 +1,14 @@
+<h1>Incubyte Assessment</h1>
+
+<form class="form-content">
+  <input #inputField type="text" />
+  <button type="submit" (click)="submitValue($event, inputField.value)">
+    Add
+  </button>
+</form>
+
+<h2 [ngClass]="{ 'error-msg': errorAnswer }" *ngIf="answer != null">
+  Output: {{ answer }}
+</h2>
+
 <router-outlet />

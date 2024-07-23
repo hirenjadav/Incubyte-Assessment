@@ -1,14 +1,34 @@
+import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet],
+  imports: [RouterOutlet, CommonModule],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
 })
 export class AppComponent {
+
+  errorAnswer: boolean = false;
+  answer: any = null;
+  submitValue(e: Event, numbers: string): void {
+    e.preventDefault();
+    this.errorAnswer = false;
+    try {
+      this.answer = this.add(numbers);
+      
+      if(!this.answer) {
+        this.answer = "Invalid Test Case";
+        this.errorAnswer = true;
+      }
+
+    } catch(e: any) {
+      this.answer = e.message;
+      this.errorAnswer = true;
+    }
+  }
 
   add(numbers: string): number {
     // return 0 when numbers list is empty
