@@ -86,4 +86,10 @@ describe('AppComponent', () => {
     expect(app.add('5,6000,10,12')).toEqual(27);
   });
 
+  it('should test add for delimiter with multiple characters', () => {
+    const fixture = TestBed.createComponent(AppComponent);
+    const app = fixture.componentInstance;
+    expect(app.add('//[**]5**8**12**15')).toEqual(40);
+  });
+
 });

@@ -15,16 +15,27 @@ export class AppComponent {
 
     let delimiter: string = ',';
     if(numbers.startsWith('//')) {
-
-      // This check is when delimiter is '-' then we need to separate it from negative numbers.
-      if(numbers[2] == '-') {
-        numbers = numbers.replaceAll('-', delimiter);
-        numbers = numbers.replaceAll(`${delimiter}${delimiter}`, `${delimiter}-`);
-      }
       
-      // To extract delimiter
-      delimiter = numbers[2];
-      numbers = numbers.substring(3);
+      // This check is when delimiter having multiple characters
+      if(numbers[2] == '[') {
+        let i: number = 3;
+        while(numbers[i] != ']') i++;
+
+        delimiter = numbers.substring(3, i);
+        numbers = numbers.substring(i + 1);
+      } else {
+        
+        // This check is when delimiter is '-' then we need to separate it from negative numbers.
+        if(numbers[2] == '-') {
+          numbers = numbers.replaceAll('-', delimiter);
+          numbers = numbers.replaceAll(`${delimiter}${delimiter}`, `${delimiter}-`);
+        
+        }
+        
+        // To extract delimiter
+        delimiter = numbers[2];
+        numbers = numbers.substring(3);
+      }
     }
 
     numbers = numbers.replaceAll('\n', delimiter);
