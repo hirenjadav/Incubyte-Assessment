@@ -15,13 +15,23 @@ export class AppComponent {
 
     let delimiter: string = ',';
     if(numbers.startsWith('//')) {
+
+      // This check is when delimiter is '-' then we need to separate it from negative numbers.
+      if(numbers[2] == '-') {
+        numbers = numbers.replaceAll('-', delimiter);
+        numbers = numbers.replaceAll(`${delimiter}${delimiter}`, `${delimiter}-`);
+      }
+      
+      // To extract delimiter
       delimiter = numbers[2];
       numbers = numbers.substring(3);
     }
 
     numbers = numbers.replaceAll('\n', delimiter);
+    
     const numberArr: string[] = numbers.split(delimiter);
     const negativeNumberArr: number[] = [];
+    
     const sum: number = numberArr.reduce((a, x) => {
       const currNum: number = parseInt(x);
       if(currNum < 0)

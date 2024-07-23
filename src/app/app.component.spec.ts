@@ -68,4 +68,16 @@ describe('AppComponent', () => {
     expect(() => app.add('5,3,-9,6,-12')).toThrowError('negative numbers not allowed -9, -12');
   });
 
+  it('should test add for delimiter "-"', () => {
+    const fixture = TestBed.createComponent(AppComponent);
+    const app = fixture.componentInstance;
+    expect(app.add('//-5-8\n12-15')).toEqual(40);
+  });
+
+  it('should test add for throwing error for negative numbers having delimiter "-"', () => {
+    const fixture = TestBed.createComponent(AppComponent);
+    const app = fixture.componentInstance;
+    expect(() => app.add('//-5-3--9-6--12')).toThrowError('negative numbers not allowed -9, -12');
+  });
+
 });
