@@ -8,4 +8,11 @@ import { RouterOutlet } from '@angular/router';
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
 })
-export class AppComponent {}
+export class AppComponent {
+
+  add(numbers: string): number {
+    if(numbers.length === 0) return 0;
+
+    return 0;
+  }
+}

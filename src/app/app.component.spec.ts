@@ -14,4 +14,10 @@ describe('AppComponent', () => {
     expect(app).toBeTruthy();
   });
 
+  it('should test add for empty string', () => {
+    const fixture = TestBed.createComponent(AppComponent);
+    const app = fixture.componentInstance;
+    expect(app.add('')).toEqual(0);
+  });
+
 });
