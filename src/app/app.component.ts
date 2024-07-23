@@ -21,7 +21,25 @@ export class AppComponent {
 
     numbers = numbers.replaceAll('\n', delimiter);
     const numberArr: string[] = numbers.split(delimiter);
-    const sum: number = numberArr.reduce((a, x) => a + parseInt(x), 0);
+    const negativeNumberArr: number[] = [];
+    const sum: number = numberArr.reduce((a, x) => {
+      const currNum: number = parseInt(x);
+      if(currNum < 0)
+        negativeNumberArr.push(currNum);
+
+      return a + currNum;
+    }, 0);
+
+    if(negativeNumberArr.length) {
+      let errorMessage: string = 'negative numbers not allowed ';
+      negativeNumberArr.forEach((x, i) => {
+        if(i != 0)
+          errorMessage += ', ';
+        
+        errorMessage += x;
+      })
+      throw new Error(errorMessage);
+    }
 
     return sum;
   }
