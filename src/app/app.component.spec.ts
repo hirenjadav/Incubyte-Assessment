@@ -80,4 +80,10 @@ describe('AppComponent', () => {
     expect(() => app.add('//-5-3--9-6--12')).toThrowError('negative numbers not allowed -9, -12');
   });
 
+  it('should test add for ignore number greater then 1000', () => {
+    const fixture = TestBed.createComponent(AppComponent);
+    const app = fixture.componentInstance;
+    expect(app.add('5,6000,10,12')).toEqual(27);
+  });
+
 });

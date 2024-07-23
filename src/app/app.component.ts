@@ -34,8 +34,12 @@ export class AppComponent {
     
     const sum: number = numberArr.reduce((a, x) => {
       const currNum: number = parseInt(x);
-      if(currNum < 0)
+      
+      if(currNum < 0) {
         negativeNumberArr.push(currNum);
+      } else if(currNum > 1000) {
+        return a; // Handled test case from TDD-KATA-1 (Case 6: Ignore number greater then 1000)
+      }
 
       return a + currNum;
     }, 0);
