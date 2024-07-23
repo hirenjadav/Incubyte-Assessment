@@ -50,4 +50,16 @@ describe('AppComponent', () => {
     expect(app.add('5\n8,12\n15')).toEqual(40);
   });
 
+  it('should test add for different delimiters', () => {
+    const fixture = TestBed.createComponent(AppComponent);
+    const app = fixture.componentInstance;
+    expect(app.add('//;5;8;12')).toEqual(25);
+  });
+
+  it('should test add for different delimiters with \\n', () => {
+    const fixture = TestBed.createComponent(AppComponent);
+    const app = fixture.componentInstance;
+    expect(app.add('//;5;8\n12;15')).toEqual(40);
+  });
+
 });

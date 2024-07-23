@@ -13,8 +13,14 @@ export class AppComponent {
   add(numbers: string): number {
     if(numbers.length === 0) return 0;
 
-    numbers = numbers.replaceAll('\n', ',');
-    const numberArr: string[] = numbers.split(',');
+    let delimiter: string = ',';
+    if(numbers.startsWith('//')) {
+      delimiter = numbers[2];
+      numbers = numbers.substring(3);
+    }
+
+    numbers = numbers.replaceAll('\n', delimiter);
+    const numberArr: string[] = numbers.split(delimiter);
     const sum: number = numberArr.reduce((a, x) => a + parseInt(x), 0);
 
     return sum;
