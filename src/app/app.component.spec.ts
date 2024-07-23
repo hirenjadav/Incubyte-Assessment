@@ -38,4 +38,16 @@ describe('AppComponent', () => {
     expect(app.add('5,12,16,8')).toEqual(41);
   });
 
+  it('should test add for \\n saperated numbers', () => {
+    const fixture = TestBed.createComponent(AppComponent);
+    const app = fixture.componentInstance;
+    expect(app.add('5\n8,12')).toEqual(25);
+  });
+
+  it('should test add for multiple \\n saperated numbers', () => {
+    const fixture = TestBed.createComponent(AppComponent);
+    const app = fixture.componentInstance;
+    expect(app.add('5\n8,12\n15')).toEqual(40);
+  });
+
 });
