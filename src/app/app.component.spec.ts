@@ -20,4 +20,10 @@ describe('AppComponent', () => {
     expect(app.add('')).toEqual(0);
   });
 
+  it('should test add for single number', () => {
+    const fixture = TestBed.createComponent(AppComponent);
+    const app = fixture.componentInstance;
+    expect(app.add('5')).toEqual(5);
+  });
+
 });
